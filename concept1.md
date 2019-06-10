@@ -59,16 +59,28 @@ let person = {
 また、変数に値を代入する際に値がない場合はデフォルトの値を入れるということも出来ます。例えば、以下では、roleが設定されていない場合は"CEO"を自動的で代入するようにしています。
 
 ```javascript
-let person = {
+let steve = {
   name: "Steve Jobs",
   email: "steve@apple.com",
-  role: null
 }
 
-let { name, email, role = "CEO" } = person;
+let ive = {
+  name: "Jony Ive",
+  email: "ive@apple.com",
+  role: "CDO"
+}
 
-console.log(role); // "CEO"
+function showRole(person) {
+  let { name, email, role = "CEO" } = person;
+  console.log(role);
+}
+
+// steveはroleというkeyを持たないためデフォルトのCEOが使われます。
+showRole(steve); // CEO
+showRole(ive); // CDO
 ```
+
+<iframe width="100%" height="300" src="//jsfiddle.net/codegrit_hiro/fd840qg5/1/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
 - **異なる変数名を利用する**
 
@@ -78,15 +90,17 @@ console.log(role); // "CEO"
 let person = {
   name: "Steve Jobs",
   email: "steve@apple.com",
-  role: null
+  role: "CEO"
 }
 
-let { name: fullName, email: mail, role: job = "CEO" } = person;
+let { name: fullName, email: mail, role: job } = person;
 
 console.log(fullName); // "Steve Jobs"
 console.log(mail); // "steve@apple.com"
 console.log(job); // "CEO
 ```
+
+<iframe width="100%" height="300" src="//jsfiddle.net/codegrit_hiro/fybox53c/2/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
 - **ネストされたオブジェクトに対する分割代入**
 
@@ -102,16 +116,18 @@ let person = {
   }
 }
 
-let { company: { name: companyName, founded = "不明" } } = person;
+let { company: { name: companyName, founded, headquarter = "クパチーノ" } } = person;
 
 console.log(companyName); // "Apple, Inc"
 console.log(founded); // "1976年4月1日"
+console.log(headquarter); // "クパチーノ"
 ```
+
+<iframe width="100%" height="300" src="//jsfiddle.net/codegrit_hiro/dwbs0yo6/2/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
 ### Arrayの分割代入
 
 Arrayの分割代入のシンタックスはObjectの分割代入と非常に似ている
-
 
 - **Arrayの要素を代入する**
 
@@ -134,6 +150,8 @@ let [ , , microsoft ] = companies;
 console.log(microsoft); // "Microsoft"
 ```
 
+<iframe width="100%" height="300" src="//jsfiddle.net/codegrit_hiro/nhaqdg37/1/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
 - **変数に値を代入する**
 
 分割代入を使うと、既存の変数にArrayからまとめて値を代入することも簡単です。
@@ -148,6 +166,8 @@ let facebook = "Facebook, Inc";
 console.log(apple); // "Apple"
 console.log(facebook); // "Facebook"
 ```
+
+<iframe width="100%" height="300" src="//jsfiddle.net/codegrit_hiro/gw38fh9b/2/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
 - **変数の値の交換**
 
@@ -169,13 +189,15 @@ console.log(b); // 1
 上記のように、分割代入をしない場合はtempという変数を用意し、そこに一旦aの値を代入するという手間が発生します。これを分割代入を使って次のように書き換えることが出来ます。
 
 ```javascript
-let a = 1, b = 2;
+let c = 1, d = 2;
 
-[ a, b ] = [ b, a ]
+[ c, d ] = [ d, c ]
 
-console.log(a); // 2
-console.log(b); // 1
+console.log(c); // 2
+console.log(d); // 1
 ```
+
+<iframe width="100%" height="300" src="//jsfiddle.net/codegrit_hiro/g08zuthj/1/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
 - **デフォルトの値の設定**
 
@@ -189,6 +211,8 @@ let [ apple, facebook, , tesla = "Tesla, Inc" ] = companies;
 console.log(tesla); // "Tesla, Inc"
 ```
 
+<iframe width="100%" height="300" src="//jsfiddle.net/codegrit_hiro/an4z6do1/1/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
 - **ネストされたArrayの分割代入**
 
 Objectの場合と同様、ArrayにネストされたArrayの値を分割代入することも出来ます。
@@ -201,3 +225,5 @@ let [ , [ facebook, instagram ] ] = companies
 console.log(facebook); // "Facebook";
 console.log(instagram); // "Instagram";
 ```
+
+<iframe width="100%" height="300" src="//jsfiddle.net/codegrit_hiro/eo74s5c0/2/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
