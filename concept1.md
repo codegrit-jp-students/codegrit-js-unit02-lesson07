@@ -15,7 +15,7 @@ let person = {
 }
 
 let name = person.name;
-let email = person.email; 
+let email = person.email;
 ```
 
 これを分割代入を利用すると以下のように書くことが出来ます。
@@ -46,9 +46,9 @@ let person = {
 分割代入を利用すると、これは以下のように書き換えられます。
 
 ```javascript
-let person = { 
-  name, 
-  email 
+let person = {
+  name,
+  email
 }
 ```
 

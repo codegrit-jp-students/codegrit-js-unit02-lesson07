@@ -43,6 +43,8 @@ set1.clear();
 console.log(set1.size); // 0
 ```
 
+<iframe width="100%" height="300" src="//jsfiddle.net/codegrit_hiro/Laq62d53/1/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
 - **Setを配列に変換する**
 
 Setと配列は非常によく似ているため、Setを配列に返還することも簡単に出来ます。また、先ほど学んだspreadオペレーターと組み合わせることで重複をなくした配列を簡単に作ることが出来ます。
@@ -54,6 +56,8 @@ let arr2 = [...set1]; // スプレッドオペレーターを利用して、Set�
 
 console.log(arr2); // [1,3,2,4];
 ```
+
+<iframe width="100%" height="300" src="//jsfiddle.net/codegrit_hiro/vu6qw712/1/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
 ## Map
 
@@ -72,9 +76,11 @@ let keys = Object.keys(obj1); // 繰り返し処理のためにkeyを配列と�
 console.log(keys[1]); // "1"
 
 keys.forEach((key) => {
-  console.log(obj1[key]);
+  console.log(obj1[key]); // "one" "Two" "Three"
 });
 ```
+
+<iframe width="100%" height="300" src="//jsfiddle.net/codegrit_hiro/dp7ygw08/1/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
 上記のような、Objectを利用した場合の手間がMapではなく、またObjectに比べて高速で繰り返し処理を行うことが出来ます。
 
@@ -113,59 +119,95 @@ map2.forEach((value, key) => {
 });
 ```
 
+<iframe width="100%" height="500" src="//jsfiddle.net/codegrit_hiro/pdmhetjx/1/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
 ## Symbol
 
-### シンボル
+### シンボルの特徴と定義方法
 
-ES5にはなかったシンボルがES6では使用できるようになりました。シンボルはオブジェクトに似ているため、作成されたシンボルは全てユニーク、つまりどれ一つとして同じになるシンボルはないと言う特徴があります。
+シンボルはES6から追加されたプリミティブ型です。JavaScriptに習熟するまではシンボルを利用するメリットや使い所はなかなか分かりづらいかと思いますが存在については知っておき、徐々にマスターすることを目指しましょう。
 
-シンボルはプリミティブ（基本型）で、リテラル（テキスト文字）表現を持たないことも特徴です。
-
-シンボルは以下のように書くことで使用できます。
+以下のようにして作成することが出来ます。
 
 ```js
-const GREETINGS = Symbol("こんにちは");
-console.log(GREETINGS); // Symbol(こんにちは)
+Symbol("シンボルの名前")
 ```
 
-<img src="images/class2-symbol.png" />
-
- `Symbol(こんにちは)` が返ってきました。
-
-シンボルがユニークなことである証拠を確かめてみましょう。
-１つの例として、 `厳密等価演算子` の `===` を使用して確かめます。
-
-厳密等価演算子は、以下のケースかどうかを確かめることができます。
-（詳しくはClass 3へ。）
-
-| 厳密等価演算子として見なされる基準 |  |
-| ------------- | -----:|
-| 同じオブジェクトを参照 | プリミティブ型で、データ型も値も同じ |
-
-これだけでは少し理解が難しいので、簡単な厳密等価演算子の例を先に見てみましょう。
+このような作成方法は他のプリミティブ型でも同様に出来ます。
 
 ```js
-const one = 1;
-const literalOne = "1";
-console.log(one === literalOne); // false
+Number(5); 
+5 // Number(5)の省略形
+
+String("文字列です。")
+"文字列です。" // String("文字列です。")の省略形
+
+Boolean(true);
+true // Boolean(true)の省略形
 ```
 
-同じ `1` を変数に入れたのに、なぜ `false` が返ってきたのでしょうか？
-これは、１行目の `one` の1は数値で、２行目の `literalOne` は文字列としての1という `データ型の違い` （文字列と数値という違い）があり、厳密等価演算子では `false` つまり one と literalOne は同じ１ではないと見なされます。
+<iframe width="100%" height="300" src="//jsfiddle.net/codegrit_hiro/5upqhykd/1/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
-話を元に戻すと、シンボルがユニーク、つまり１つ１つ異なるものであることを証明するために厳密等価演算子を使用してみましょうとなっていたので、上記の例を利用します。
+他の型だと、上記の例のように省略して書く方法がありますがSymbolにはありません。
 
-先ほどの例が同じ１でも、データ型が異なっていたために `false` になったのであれば、データ型の違いはなくても、１つ１つがユニークでお異なるシンボルは同じ名前のシンボルでも `false` となるはずです。
+シンボル型は他のプリミティブ型と異なり、全てのシンボルはユニーク(互いに一致しない)です。
 
 ```js
-const me = Symbol("私");
-const watashi = Symbol("私");
-console.log(me === watashi);// false
+// 他の型
+true === true // true
+"test" === "test" // true
+5 === 5 // true
+
+// シンボル型
+
+Symbol("test") === Symbol("test") // false
 ```
 
-これは、特にオブジェクトとオブジェクト指向プログラミングにおいて、識別子を区別する際にとても役立ちます。
+<iframe width="100%" height="300" src="//jsfiddle.net/codegrit_hiro/8brxLqus/2/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
-オブジェクトに新しいプロパティを加える時に、他に既存のプロパティと同じ識別子になってしまい、競合するというリスクをなくすことができます。
+### シンボルの使いどころ
+
+シンボルはES6から登場しましたが、ES5までは文字列でシンボルの代用をしてきていたこともあり、現状シンボルを使ったプログラムを見る機会は少ないかと思います。シンボルのわかりやすい使い所の一つは、限られた選択肢だけを持つ、Switch文などを作りたい場合です。
+
+例えば以下の例を見てみましょう。
+
+```js
+let votes = 0;
+const UPVOTE = Symbol('UP');
+const DOWNVOTE = Symbol('DOWN');
+
+function upvote() {
+  console.log('ポジティブな投票をしました。')
+  votes++;
+}
+
+function downvote() {
+  console.log('ネガティブな投票をしました。')
+  votes--;
+}
+
+function dealVote(vote) {
+  switch (vote) {
+    case UPVOTE:
+      return upvote();
+      break;
+    case DOWNVOTE:
+      return downvote();
+      break;
+    default:
+      console.log("投票形式が異なります。")
+  }
+}
+
+dealVote(UPVOTE); // ポジティブな投票をしました。
+dealVote(UPVOTE); // ポジティブな投票をしました。
+dealVote('UP'); // 投票形式が異なります。
+dealVote('DOWN'); // 投票形式が異なります。
+dealVote(DOWNVOTE); // ネガティブな投票をしました。
+console.log(votes); // 1
+```
+
+<iframe width="100%" height="300" src="//jsfiddle.net/codegrit_hiro/q6hnfc1x/4/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
 ## 更に学ぼう
 

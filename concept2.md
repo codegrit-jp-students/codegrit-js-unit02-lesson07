@@ -20,6 +20,8 @@ let arr = [...str, "d", "e", "f"];
 console.log(arr); // ["a", "b", "c", "d", "e", "f"]
 ```
 
+<iframe width="100%" height="300" src="//jsfiddle.net/codegrit_hiro/k2tgjsw6/1/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
 - **ファンクションの引数に利用する**
 
 以下はファンクションの引数としてarrayの要素をとる例です。
@@ -34,6 +36,8 @@ const addThreeNums = (a, b, c) => {
 
 console.log(addThreeNums(...numbers)); // 6
 ```
+
+<iframe width="100%" height="300" src="//jsfiddle.net/codegrit_hiro/63nwvmbc/1/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
 - **オブジェクトを複製する**
 
@@ -56,6 +60,8 @@ console.log(copy2 === obj); // false
 console.log(copy1 === copy2); // false
 ```
 
+<iframe width="100%" height="300" src="//jsfiddle.net/codegrit_hiro/ag921m4j/2/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
 - **配列を複製する**
 
 オブジェクトと同様に配列の複製も出来ます。
@@ -71,6 +77,8 @@ console.log(arr === copy1); // false
 console.log(arr === copy2); // false
 console.log(copy1 === copy2); // false
 ```
+
+<iframe width="100%" height="300" src="//jsfiddle.net/codegrit_hiro/pv0Ljgn5/1/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
 ## restパラメーター
 
@@ -97,6 +105,7 @@ function sayProducts(company, ...products) {
 }
 
 sayProducts("Google", "Googleドライブ", "Gmail", "Googleドキュメント", "Googleサーチ");
+
 /* 
 Googleのサービスは以下のようなものがあります:
 Googleドライブ
@@ -104,5 +113,7 @@ Googleドキュメント
 Googleサーチ
 */
 ```
+
+<iframe width="100%" height="300" src="//jsfiddle.net/codegrit_hiro/ja3eom82/2/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
 このように、引数の数が決っていない場合に、繰り返し処理を行う上で、restオペレーターを利用すると便利です。
